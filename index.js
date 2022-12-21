@@ -13,17 +13,18 @@ const corsOption = {
   origin: ["http://localhost:3000"],
 };
 app.use(cors(corsOption));
+// Database And Port
 DbConnect();
 app.listen(PORT, () => {
   console.log("Server is running on port http://localhost:" + PORT);
 });
+// CSV to JSON
 const jsonData = [];
 fs.createReadStream("test-csv.csv")
-  .pipe(parse({ columns: true }))
-  .on("data", (data) => {
-    jsonData.push(data);
-  })
-  .on("error", (err) => console.log(err));
+.pipe(parse({ columns: true }))
+.on("data", (data) => {jsonData.push(data);
+}).on("error", (err) => console.log(err));
+// API End Point
 app.post("/save", async (req, res) => {
   try {
     jsonData.forEach(async (item) => {
