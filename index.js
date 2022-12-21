@@ -26,11 +26,10 @@ fs.createReadStream("test-csv.csv")
   .on("error", (err) => console.log(err));
 app.post("/save", async (req, res) => {
   try {
-    let insertedData;
     jsonData.forEach(async (item) => {
       let data = await AllValidator.fieldValide( item.Email,item.Phone,item.Pincode);
       if (data) {
-        insertedData = await csvInsert.create(item);
+        let insertedData = await csvInsert.create(item);
         console.log(insertedData)
       }
     });
