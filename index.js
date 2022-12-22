@@ -39,3 +39,8 @@ app.post("/save", async (req, res) => {
     res.status(500).json({ error });
   }
 });
+
+app.post('/allData',async(req,res)=>{
+    let data = await csvInsert.find()
+    res.status(200).json(data)
+})
